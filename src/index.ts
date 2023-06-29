@@ -1,4 +1,5 @@
 import http from 'node:http';
+import 'dotenv/config';
 import { routes } from './controller/routes';
 
 const PORT = process.env.PORT || 4000;

@@ -14,10 +14,10 @@ export const users: User[] = [
     username: 'Mishka',
     age: 25,
     hobbies:['fishing', 'tv']
-},{
-    id: v4(),
-    username: 'Mikola',
-    age: 33,
-    hobbies:['beerYoga', 'gaming']
-},
+    }, {
+        id: v4(),
+        username: 'Mikola',
+        age: 33,
+        hobbies:['beerYoga', 'gaming']
+    },
 ];

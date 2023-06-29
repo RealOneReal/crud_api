@@ -4,7 +4,9 @@
   "description": "pet-project",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --config nodemon.json src/index.ts"
+    "dev": "nodemon --config nodemon.json src/index.ts",
+    "build": "webpack --mode production",
+    "start": "npm run build && nodemon dist/server.js"
   },
   "author": "",
   "license": "ISC",
