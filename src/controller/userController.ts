@@ -35,7 +35,7 @@ export const addUser = (req: IncomingMessage, res: ServerResponse) => {
             res.setHeader('Content-Type', 'application/json');
             res.setHeader('Content-Length', responseBody.length);
             res.write(responseBody);
-            res.end('Wrong data in request');
+            res.end();
             return;
         }
         res.statusCode = 400;

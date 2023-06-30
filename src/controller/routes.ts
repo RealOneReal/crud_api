@@ -13,7 +13,6 @@ export const routes: RequestListener = (req: IncomingMessage, res: ServerRespons
             }
         } else if (url?.startsWith('/api/users/')) {
             const id = url.slice(11);
-            console.log(id);
             if (typeof id !== 'string') {
                 res.statusCode = 404;
                 res.end('Request should contain correct id');
