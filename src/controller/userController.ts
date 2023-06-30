@@ -107,5 +107,6 @@ export const deleteUser = (req: IncomingMessage, res: ServerResponse, id: string
     const userIndex = users.indexOf(deletedUser);
     users.splice(userIndex, 1);
     res.statusCode = 204;
+    console.log(users);
     res.end();
 };

@@ -10,11 +10,12 @@ export interface User {
 
 export const users: User[] = [
     {
-    id: v4(),
-    username: 'Mishka',
-    age: 25,
-    hobbies:['fishing', 'tv']
-    }, {
+        id: v4(),
+        username: 'Mishka',
+        age: 25,
+        hobbies:['fishing', 'tv']
+    }, 
+    {
         id: v4(),
         username: 'Mikola',
         age: 33,
