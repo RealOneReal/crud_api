@@ -21,29 +21,31 @@ if (cluster.isPrimary) {
       cluster.fork();
   });
 
-    ((startPort: number) => {
-      http.createServer((req, res) => {
-          const nextRoundRobinPort = getPort(startPort);
-          console.log(`Sending request to port ${nextRoundRobinPort}`);
-          const url = new URL(req.url, `http://${req.headers.host}`);
-          const pathname = url.pathname;
-          const options = {
-              ...url,
-              pathname,
-              port: nextRoundRobinPort,
-              headers: req.headers,
-              method: req.method,
-          };
+  const proxyServer = http.createServer((req, res) => {
+      const nextRoundRobinPort = getPort(START_PORT);
+      console.log(`Sending request to port ${nextRoundRobinPort}`);
+      const url = new URL(req.url, `http://${req.headers.host}`);
+      const pathname = url.pathname;
+      const options = {
+          ...url,
+          pathname,
+          port: nextRoundRobinPort,
+          headers: req.headers,
+          method: req.method,
+      };
 
-          req.pipe(
-              http.request(options, (response) => {
-                console.log(`Received response from port ${nextRoundRobinPort}`);
-                  res.writeHead(response.statusCode, response.headers);
-                  response.pipe(res);
-              }),
-          );
-      }).listen(startPort, () => console.log(`Balancer created on PORT ${startPort} `));
-      })(START_PORT);
+      req.pipe(
+          http.request(options, (response) => {
+            console.log(`Received response from port ${nextRoundRobinPort}`);
+              res.writeHead(response.statusCode, response.headers);
+              response.pipe(res);
+          }),
+      );
+  });
+  
+  proxyServer.listen(START_PORT, () => {
+    console.log(`Balancer created on PORT ${START_PORT}`)
+  });
 
 } else {
   const workerPort = START_PORT + cluster.worker.id;
